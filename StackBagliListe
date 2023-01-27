@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+
+    int data;
+    struct node *next;
+
+};
+
+struct node * temp=NULL;
+struct node * top=NULL;
+
+void push(int veri) //eleman ekleme işlemi
+{
+    struct node * eleman=(struct node *)malloc(sizeof(struct node));
+    
+    eleman->data=veri;
+
+
+    if(top==NULL){
+        top=eleman;
+        top->next=NULL;
+    }
+    else{
+        eleman->next=top;
+        top=eleman;
+    }
+}
+
+void pop(){ //eleman cikarildi
+    if(top==NULL){
+        printf("yigin bos, cikartilacak eleman yok\n");
+        
+    }
+    else{
+        printf("%d elemani stackten cikarildi\n", top->data);
+        temp=top->next;
+        free(top);
+        top=temp;
+    }
+
+}
+
+void print(){ //elemanlari yazdirma
+    if(top==NULL){
+        printf("stack bos, eleman yok");
+    }
+    else{
+        temp=top;
+        while(temp->next!=NULL){
+            printf("%d\n",temp->data);
+            temp=temp->next;
+
+        }
+         printf("%d\n",temp->data);
+    }
+}
+
+void peek(){
+    if(top==NULL){
+        print("Eleman yok, NULL gosteriyor");
+
+    }
+    else{
+        print("Yigindaki en ust eleman : %d", top->data);
+    }
+}
+
+
+
+int main(){
+
+
+    int secim, sayi;
+
+    while(1){
+        printf("STACK (YIGIN)\n");
+        printf("1-- Push islemi");
+        printf("2-- Pop islemi");
+        printf("3-- print islemi");
+        printf("4-- Peek(en ust deger) islemi");
+        printf("5-- Cikis islemi");
+        scanf("%d",&secim);
+  
+    switch(secim){
+        case 1: printf("Stack'e eklenecek sayi : "); 
+        scanf("%d",&sayi); 
+        push(sayi);
+        break;
+        case 2:
+        pop();
+        break;
+        case 3: print(); break;
+        case 4: peek(); break;
+        case 5: return 0;
+
+    }
+    }
+
+
+
+    return 0;
+    scanf(" ");
+    
+}
